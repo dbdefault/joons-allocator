@@ -1,8 +1,10 @@
-﻿# JOONS Allocator 0.1.0
+# JOONS Allocator 0.1.0
 
 English: [README.md](README.md)
 
 AI 에이전트를 위한 가벼운 작업 할당 및 작업자 조정 도구입니다.
+
+> [JOONS 생태계](https://github.com/dbdefault/joons-ecosystem)(MCP 기반 AI 인프라 생태계)의 일부입니다.
 
 ![Preview](https://img.shields.io/badge/status-Preview-orange) [![CI](https://github.com/dbdefault/joons-allocator/actions/workflows/ci.yml/badge.svg)](https://github.com/dbdefault/joons-allocator/actions/workflows/ci.yml)
 

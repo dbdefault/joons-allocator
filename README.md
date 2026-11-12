@@ -1,6 +1,8 @@
-﻿# JOONS Allocator 0.1.0
+# JOONS Allocator 0.1.0
 
 Lightweight task allocation and worker coordination for AI agents.
+
+> Part of the [JOONS ecosystem](https://github.com/dbdefault/joons-ecosystem): MCP-Based AI Infrastructure Ecosystem.
 
 ![Preview](https://img.shields.io/badge/status-Preview-orange) [![CI](https://github.com/dbdefault/joons-allocator/actions/workflows/ci.yml/badge.svg)](https://github.com/dbdefault/joons-allocator/actions/workflows/ci.yml) | [한국어](README.ko.md)
 
