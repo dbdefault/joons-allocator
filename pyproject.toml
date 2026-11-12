@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "joons-allocator"
+version = "0.1.0"
+description = "Lightweight task allocation and worker coordination for AI agents."
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
+# Standard library only at runtime. joons-agent-guard is the optional
+# 'guard' extra (integration hooks), never a core dependency.
+dependencies = []
+
+[project.optional-dependencies]
+guard = ["joons-agent-guard @ git+https://github.com/dbdefault/joons-agent-guard"]
+test = ["pytest>=7"]
+
+[project.scripts]
+joons-allocator = "joons_allocator.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+joons_allocator = ["py.typed"]

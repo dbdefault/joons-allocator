@@ -1,0 +1,24 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Packaging / build
+build/
+dist/
+*.egg-info/
+
+# Test / coverage tooling
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Virtual environments
+.venv/
+venv/
+
+# Working queue databases (never commit live data)
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
