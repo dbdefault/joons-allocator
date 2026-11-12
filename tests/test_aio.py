@@ -238,9 +238,19 @@ class TestCancellation(AioTestCase):
                     await task_ref
                 # the claim landed after the cancellation; the adapter hands
                 # the task back to the queue instead of stranding it running
-                await asyncio.sleep(0.35)
+                # wait (bounded) for the worker-thread claim and the adapter's
+                # compensation to finish; slow CI runners need more than a
+                # fixed sleep
+                deadline = time.monotonic() + 15.0
+                while time.monotonic() < deadline:
+                    snapshot = await adapter.get("task-1")
+                    slots = await adapter.workers()
+                    # done when the claim registered the worker AND the
+                    # compensation put the task back and freed the slot
+                    if slots and snapshot.state == "queued" and slots[0].current_task is None:
+                        break
+                    await asyncio.sleep(0.05)
                 del dispatcher.lease
-                snapshot = await adapter.get("task-1")
                 self.assertEqual(snapshot.state, "queued")
                 self.assertIsNone(snapshot.worker_id)
                 self.assertIsNone(snapshot.lease_token)

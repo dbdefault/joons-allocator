@@ -18,7 +18,20 @@ import sys
 src, db = sys.argv[1], sys.argv[2]
 sys.path.insert(0, src)
 
-# the hard requirement: no guard on the path, none in sys.modules, ever
+
+class _HideGuard:
+    # The guard may be installed in this interpreter (e.g. the CI job that
+    # tests the optional integration). Hide it so the child proves that
+    # joons_allocator works when the guard is absent.
+    def find_spec(self, name, path=None, target=None):
+        if name == "joons_agent_guard" or name.startswith("joons_agent_guard."):
+            raise ModuleNotFoundError("No module named %r (hidden by test)" % name, name=name)
+        return None
+
+
+sys.meta_path.insert(0, _HideGuard())
+
+# the hard requirement: no guard reachable, none in sys.modules, ever
 try:
     import joons_agent_guard  # noqa: F401
 except ModuleNotFoundError:
